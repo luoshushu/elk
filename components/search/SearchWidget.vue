@@ -39,6 +39,10 @@ const results = computed(() => {
 watch([results, focused], () => index.value = -1)
 
 function shift(delta: number) {
+  // Keyboard up navigation active position is not the last item
+  if (delta === -1 && index.value === -1)
+    index.value = 0
+
   return index.value = (index.value + delta % results.value.length + results.value.length) % results.value.length
 }
 
